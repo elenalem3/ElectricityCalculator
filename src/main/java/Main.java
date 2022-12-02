@@ -28,7 +28,7 @@ public class Main {
 
         if (sumMonth <= norm) {
             double sumDay = consumptionDay * dayNorm;
-            double sumNight = currentNight * nightNorm;
+            double sumNight = consumptionNight * nightNorm;
             System.out.println("Стоимость по по тарифу 'День' составила: " + sumDay +
                     "\nСтоимость по тарифу 'Ночь' составила: " + sumNight +
                     "\nОбщая стоимость потребления за месяц: " + (sumDay + sumNight));
