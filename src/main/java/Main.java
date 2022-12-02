@@ -1,11 +1,17 @@
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Main {
     public static int norm = 85; //норматив потребления на одного человека
-    public static double dayNorm = 4.51;
-    public static double dayMoreNorm = 8.31;
-    public static double nightNorm = 2.20;
-    public static double nightMoreNorm = 4.34;
+
+    public static BigDecimal dayNorm = new BigDecimal("4.51");
+    public static BigDecimal dayMoreNorm = new BigDecimal("8.31");
+    public static BigDecimal nightNorm = new BigDecimal("2.20");
+    public static BigDecimal nightMoreNorm = new BigDecimal("4.34");
+//    public static double dayNorm = 4.51;
+//    public static double dayMoreNorm = 8.31;
+//    public static double nightNorm = 2.20;
+//    public static double nightMoreNorm = 4.34;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,35 +33,38 @@ public class Main {
                 "\nСумма потребления за месяц: " + sumMonth);
 
         if (sumMonth <= norm) {
-            double sumDay = consumptionDay * dayNorm;
-            double sumNight = currentNight * nightNorm;
+            BigDecimal sumDay = dayNorm.multiply(BigDecimal.valueOf(consumptionDay));
+            BigDecimal sumNight = nightNorm.multiply(BigDecimal.valueOf(consumptionNight));
+            BigDecimal result = sumDay.add(sumNight);
+//            double sumDay = consumptionDay * dayNorm;
+//            double sumNight = currentNight * nightNorm;
             System.out.println("Стоимость по по тарифу 'День' составила: " + sumDay +
                     "\nСтоимость по тарифу 'Ночь' составила: " + sumNight +
-                    "\nОбщая стоимость потребления за месяц: " + (sumDay + sumNight));
+                    "\nОбщая стоимость потребления за месяц: " + result);
         } else {
-            double sumDay = sumDay(consumptionDay, sumMonth);
-            double sumNight = sumNight(consumptionNight, sumMonth);
+//            double sumDay = sumDay(consumptionDay, sumMonth);
+//            double sumNight = sumNight(consumptionNight, sumMonth);
 
-            System.out.println("Стоимость по по тарифу 'День' составила: " + sumDay +
-                    "\nСтоимость по тарифу 'Ночь' составила: " + sumNight +
-                    "\nОбщая стоимость потребления за месяц: " + (sumDay + sumNight));
+//            System.out.println("Стоимость по по тарифу 'День' составила: " + sumDay +
+//                    "\nСтоимость по тарифу 'Ночь' составила: " + sumNight +
+//                    "\nОбщая стоимость потребления за месяц: " + (sumDay + sumNight));
         }
     }
 
-    public static double sumDay(int consumptionDay, int sumMonth) {
-        double averageSum = norm * (consumptionDay % sumMonth);
-        double sumDayNorm = averageSum * dayNorm;
-        double sumDayMoreNorm = (consumptionDay - averageSum) * dayMoreNorm;
-        double sum = sumDayNorm + sumDayMoreNorm;
-        return sum;
-    }
+//    public static double sumDay(int consumptionDay, int sumMonth) {
+//        double averageSum = norm * (consumptionDay % sumMonth);
+//        double sumDayNorm = averageSum * dayNorm;
+//        double sumDayMoreNorm = (consumptionDay - averageSum) * dayMoreNorm;
+//        double sum = sumDayNorm + sumDayMoreNorm;
+//        return sum;
+//    }
 
-    public static double sumNight(int consumptionNight, int sumMonth) {
-        double averageSum = norm * (consumptionNight % sumMonth);
-        double sumNightNorm = averageSum * nightNorm;
-        double sumNightMoreNorm = (consumptionNight - averageSum) * nightMoreNorm;
-        double sum = sumNightNorm + sumNightMoreNorm;
-        return sum;
-    }
+//    public static double sumNight(int consumptionNight, int sumMonth) {
+//        double averageSum = norm * (consumptionNight % sumMonth);
+//        double sumNightNorm = averageSum * nightNorm;
+//        double sumNightMoreNorm = (consumptionNight - averageSum) * nightMoreNorm;
+//        double sum = sumNightNorm + sumNightMoreNorm;
+//        return sum;
+//    }
 
 }
